@@ -1,5 +1,5 @@
 {
-    "name": "tecnocen/yii2-rmdb",
+    "name": "roaresearch/yii2-rmdb",
     "description": "Yii 2 Library to create RMDB models and migrations",
     "keywords": [
         "yii2",
@@ -14,20 +14,20 @@
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.5",
-        "yiisoft/yii2": "~2.0.10",
-        "tecnocen/yii2-migrate": "*"
+        "php": ">=7.1",
+        "roaresearch/yii2-migrate": "~1.0.0",
+        "yiisoft/yii2": "~2.0.27"
     },
     "require-dev": {
-        "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1"
+        "codeception/base": "^3.1.0",
+        "codeception/verify": "~1.2.0"
     },
     "suggest": {
         "yii2tech/ar-softdelete": "Needed for Persistent Entities"
     },
     "autoload": {
         "psr-4": {
-            "tecnocen\\rmdb\\": "src/"
+            "roaresearch\\yii2\\rmdb\\": "src/"
         }
     }
 }
