@@ -6,16 +6,16 @@ Library with migrations and models to easily create RMDB tables and models.
 Instalation
 -----------
 
-You can use composer to install the library `tecnocen/yii2-rmdb` by running the
+You can use composer to install the library `roaresearch/yii2-rmdb` by running the
 command;
 
-`composer require tecnocen/yii2-rmdb`
+`composer require roaresearch/yii2-rmdb`
 
 or edit the `composer.json` file
 
 ```json
 require: {
-    "tecnocen/yii2-rmdb": "*",
+    "roareasearch/yii2-rmdb": "*",
 }
 ```
 
@@ -26,14 +26,16 @@ Usage
 
 There are 3 migration classes for each type of RMDB tables.
 
-#### `tecnocen\rmdb\migrations\CreatePivot`
+#### `roaresearch\yii2\rmdb\migrations\CreatePivot`
 
 Uses the properties  `$createdByColumn`, `$createdAtColumn` and methods
 `createdByDefinition()`, `createdAtDefinition()` to store the user and datetime
 a record was created.
 
 ```php
-class m170101_000001_product_sale extends \tecnocen\rmdb\migrations\CreatePivot
+use roaresearch\yii2\rmdb\migrations\CreatePivot;
+
+class m170101_000001_product_sale extends CreatePivot
 {
     public $createdByColumn = 'creation_user';
     public $createdAtColumn = 'creation_date';
@@ -58,14 +60,16 @@ class m170101_000001_product_sale extends \tecnocen\rmdb\migrations\CreatePivot
 }
 ```
 
-#### `tecnocen\rmdb\migrations\CreateEntity`
+#### `roaresearch\yii2\rmdb\migrations\CreateEntity`
 
 Extends the previous class adding the properties  `$updatedByColumn`,
 `$updatedAtColumn` and methods `updatedByDefinition()`, `updatedAtDefinition()`
 to store the user and datetime a record was updated.
 
 ```php
-class m170101_000001_product extends \tecnocen\rmdb\migrations\CreateEntity
+use roaresearch\yii2\rmdb\migrations\CreateEntity;
+
+class m170101_000001_product extends CreateEntity
 {
     public $createdByColumn = 'creation_user';
     public $createdAtColumn = 'creation_date';
@@ -87,7 +91,7 @@ class m170101_000001_product extends \tecnocen\rmdb\migrations\CreateEntity
 }
 ```
 
-#### `tecnocen\rmdb\migrations\CreatePersistentEntity`
+#### `roaresearch\yii2\rmdb\migrations\CreatePersistentEntity`
 
 A persistent entity remains stored in the database after the user deletes it.
 
@@ -99,7 +103,9 @@ provides support for this functionality.
 `deletedAtDefinition()` to store the user and datetime a record was deleted.
 
 ```php
-class m170101_000001_sale extends \tecnocen\rmdb\migrations\CreateEntity
+use roaresearch\yii2\rmdb\migrations\CreatePersistentEntity;
+
+class m170101_000001_sale extends CreatePersistentEntity
 {
     public $createdByColumn = 'creation_user';
     public $createdAtColumn = 'creation_date';
@@ -132,7 +138,7 @@ configure it in your `common\config\main.php` in `yii-app-advanced` and
 `common\config.php` in `yii-app-basic`.
 
 ```php
-use tecnocen\rmdb\Module as RmdbModule;
+use roaresearch\yii2\rmdb\Module as RmdbModule;
 
 return [
     // ...
@@ -153,7 +159,7 @@ return [
 
 Like the migrations there are 3 classes for models.
 
-#### `tecnocen\rmdb\models\Pivot`
+#### `roaresearch\yii2\rmdb\models\Pivot`
 
 Adds protected properties `$createdByAttribute` and `$createdAtAttribute` to
 configure the names of the attributes. The class will automatically load the
@@ -161,7 +167,7 @@ needed behaviors and configure them to use the attributes as provided by this
 properties.
 
 ```php
-class ProductSale extends \tecnocen\rmdb\models\Pivot
+class ProductSale extends \roaresearch\yii2\rmdb\models\Pivot
 {
     protected $createdByAttribute = 'creation_user';
     protected $createdAtAttribute = 'creation_date';
@@ -170,7 +176,7 @@ class ProductSale extends \tecnocen\rmdb\models\Pivot
 }
 ```
 
-#### `tecnocen\rmdb\models\Entity`
+#### `roaresearch\yii2\rmdb\models\Entity`
 
 Extends the previos class and adds protected properties `$updatedByAttribute`
 and `$updatedAtAttribute` to configure the names of the attributes. The class
@@ -178,7 +184,7 @@ will automatically load the needed behaviors and configure them to use the
 attributes as provided by this properties.
 
 ```php
-class Product extends \tecnocen\rmdb\models\Entity
+class Product extends \roaresearch\yii2\rmdb\models\Entity
 {
     protected $createdByAttribute = 'creation_user';
     protected $createdAtAttribute = 'creation_date';
@@ -189,7 +195,7 @@ class Product extends \tecnocen\rmdb\models\Entity
 }
 ```
 
-#### `tecnocen\rmdb\models\PersistentEntity`
+#### `roaresearch\yii2\rmdb\models\PersistentEntity`
 
 Extends the previos class and adds protected properties `$deletedByAttribute`
 and `$deletedAtAttribute` to configure the names of the attributes. The class
@@ -197,7 +203,7 @@ will automatically load the needed behaviors and configure them to use the
 attributes as provided by this properties.
 
 ```php
-class Product extends \tecnocen\rmdb\models\PersistentEntity
+class Product extends \roaresearch\yii2\rmdb\models\PersistentEntity
 {
     protected $createdByAttribute = 'creation_user';
     protected $createdAtAttribute = 'creation_date';
