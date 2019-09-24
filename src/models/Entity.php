@@ -1,8 +1,8 @@
 <?php
 
-namespace tecnocen\rmdb\models;
+namespace roaresearch\yii2\rmdb\models;
 
-use tecnocen\rmdb\Module as RmdbModule;
+use roaresearch\yii2\rmdb\Module as RmdbModule;
 
 abstract class Entity extends Pivot
 {
@@ -21,7 +21,7 @@ abstract class Entity extends Pivot
     /**
      * @inheritdoc
      */
-    protected function attributeTypecast()
+    protected function attributeTypecast(): array
     {
         return parent::attributeTypecast() + [
             $this->updatedByAttribute => 'integer',
