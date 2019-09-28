@@ -3,7 +3,7 @@ Yii2 RMDB Classes
 
 Library with migrations and models to easily create RMDB tables and models.
 
-Instalation
+Installation
 -----------
 
 You can use composer to install the library `roaresearch/yii2-rmdb` by running the
