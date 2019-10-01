@@ -178,7 +178,7 @@ class ProductSale extends \roaresearch\yii2\rmdb\models\Pivot
 
 #### `roaresearch\yii2\rmdb\models\Entity`
 
-Extends the previos class and adds protected properties `$updatedByAttribute`
+Extends the previous class and adds protected properties `$updatedByAttribute`
 and `$updatedAtAttribute` to configure the names of the attributes. The class
 will automatically load the needed behaviors and configure them to use the
 attributes as provided by this properties.
