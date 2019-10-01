@@ -88,7 +88,7 @@ class Module extends \yii\base\Module
     {
         $i18n = Yii::$app->i18n;
         if (!isset($i18n->translations['tecnocen/rmdb/*'])) {
-            $i18n->translations['tecnocen/rmdb/*'] = [
+            $i18n->translations['roaresearch/rmdb/*'] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en',
                 'basePath' => __DIR__ . '/messages',
