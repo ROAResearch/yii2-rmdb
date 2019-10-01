@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.1",
-        "roaresearch/yii2-migrate": "~1.0.0",
+        "roaresearch/yii2-migrate": "~2.0.0",
         "yiisoft/yii2": "~2.0.27"
     },
     "require-dev": {
