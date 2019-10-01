@@ -1,8 +1,8 @@
 <?php
 
-namespace tecnocen\rmdb\models;
+namespace roaresearch\yii2\rmdb\models;
 
-use tecnocen\rmdb\Module as RmdbModule;
+use roaresearch\yii2\rmdb\Module as RmdbModule;
 
 abstract class PersistentEntity extends Entity
 {
@@ -21,7 +21,7 @@ abstract class PersistentEntity extends Entity
     /**
      * @inheritdoc
      */
-    protected function attributeTypecast()
+    protected function attributeTypecast(): ?array
     {
         return parent::attributeTypecast() + [
             $this->deletedByAttribute => 'integer',
@@ -33,7 +33,9 @@ abstract class PersistentEntity extends Entity
      */
     public function behaviors()
     {
+        /** @var RmdbModule $module */
         $module = $this->getRmdbModule();
+
         return parent::behaviors() + [
             'softDelete' => [
                 'class' => $module->softDeleteClass,

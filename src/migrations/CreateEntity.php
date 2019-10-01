@@ -1,6 +1,8 @@
 <?php
 
-namespace tecnocen\rmdb\migrations;
+namespace roaresearch\yii2\rmdb\migrations;
+
+use yii\db\ColumnSchemaBuilder;
 
 /**
  * Migration to create entity tables which contain columns to store the users
@@ -26,6 +28,7 @@ abstract class CreateEntity extends CreatePivot
     public function init()
     {
         parent::init();
+
         if (isset($this->updatedByColumn)) {
             $this->defaultColumns[$this->updatedByColumn]
                 = $this->updatedByDefinition();
@@ -39,19 +42,19 @@ abstract class CreateEntity extends CreatePivot
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to update the column to
+     * @return ColumnSchemaBuilder definition to update the column to
      * store which user updated the record.
      */
-    protected function updatedByDefinition()
+    protected function updatedByDefinition(): ColumnSchemaBuilder
     {
         return $this->normalKey()->notNull();
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to update the column to
+     * @return ColumnSchemaBuilder definition to update the column to
      * store the datetime when the record was updated.
      */
-    protected function updatedAtDefinition()
+    protected function updatedAtDefinition(): ColumnSchemaBuilder
     {
         return $this->datetime()->notNull();
     }
@@ -62,7 +65,7 @@ abstract class CreateEntity extends CreatePivot
      * @return array
      * @see defaultUserForeignKey()
      */
-    protected function updatedByForeignKey($columnName)
+    protected function updatedByForeignKey($columnName): array
     {
         return $this->defaultUserForeignKey($columnName);
     }
