@@ -103,7 +103,7 @@ class Module extends \yii\base\Module
         ?string $language = null
     ): string {
         return Yii::t(
-            'tecnocen/rmdb/' . $category,
+            'roaresearch/rmdb/' . $category,
             $message,
             $params,
             $language
