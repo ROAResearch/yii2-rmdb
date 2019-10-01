@@ -197,7 +197,7 @@ class Product extends \roaresearch\yii2\rmdb\models\Entity
 
 #### `roaresearch\yii2\rmdb\models\PersistentEntity`
 
-Extends the previos class and adds protected properties `$deletedByAttribute`
+Extends the previous class and adds protected properties `$deletedByAttribute`
 and `$deletedAtAttribute` to configure the names of the attributes. The class
 will automatically load the needed behaviors and configure them to use the
 attributes as provided by this properties.
