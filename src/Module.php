@@ -1,15 +1,17 @@
 <?php
 
-namespace tecnocen\rmdb;
+namespace roaresearch\yii2\rmdb;
 
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use Yii;
-use yii\behaviors\AttributeTypecastBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression as DbExpression;
-use yii\i18n\PhpMessageSource;
-use yii\web\Application as WebApplication;
+use yii\{
+    behaviors\AttributeTypecastBehavior,
+    behaviors\BlameableBehavior,
+    behaviors\TimestampBehavior,
+    db\Expression as DbExpression,
+    i18n\PhpMessageSource,
+    web\Application as WebApplication,
+};
 
 /**
  * Module which contains the configurations and utils for RMDB models.
@@ -86,7 +88,7 @@ class Module extends \yii\base\Module
     {
         $i18n = Yii::$app->i18n;
         if (!isset($i18n->translations['tecnocen/rmdb/*'])) {
-            $i18n->translations['tecnocen/rmdb/*'] = [
+            $i18n->translations['roaresearch/rmdb/*'] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en',
                 'basePath' => __DIR__ . '/messages',
@@ -95,13 +97,13 @@ class Module extends \yii\base\Module
     }
 
     public static function t(
-        $category,
-        $message,
-        $params = [],
-        $language = null
-    ) {
+        string $category,
+        string $message,
+        array $params = [],
+        ?string $language = null
+    ): string {
         return Yii::t(
-            'tecnocen/rmdb/' . $category,
+            'roaresearch/rmdb/' . $category,
             $message,
             $params,
             $language

@@ -1,8 +1,9 @@
 <?php
 
-namespace tecnocen\rmdb\migrations;
+namespace roaresearch\yii2\rmdb\migrations;
 
-use tecnocen\migrate\CreateTableMigration as CreateTable;
+use roaresearch\yii2\migrate\CreateTableMigration as CreateTable;
+use yii\db\ColumnSchemaBuilder;
 
 /**
  * Migration to create pivot tables which contain columns to store the user
@@ -35,7 +36,7 @@ abstract class CreatePivot extends CreateTable
      *
      * @see defaultUserForeignKey()
      */
-    public $userTablePrimrayKey = 'id';
+    public $userTablePrimaryKey = 'id';
 
     /**
      * @var \yii\db\ColumnSchemaBuilder[]
@@ -53,6 +54,7 @@ abstract class CreatePivot extends CreateTable
     public function init()
     {
         parent::init();
+
         if (isset($this->createdByColumn)) {
             $this->defaultColumns[$this->createdByColumn]
                 = $this->createdByDefinition();
@@ -82,19 +84,19 @@ abstract class CreatePivot extends CreateTable
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to create the column to
+     * @return ColumnSchemaBuilder definition to create the column to
      * store which user created the record.
      */
-    protected function createdByDefinition()
+    protected function createdByDefinition(): ColumnSchemaBuilder
     {
         return $this->normalKey()->notNull();
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to create the column to
+     * @return ColumnSchemaBuilder definition to create the column to
      * store the datetime when the record was created.
      */
-    protected function createdAtDefinition()
+    protected function createdAtDefinition(): ColumnSchemaBuilder
     {
         return $this->datetime()->notNull();
     }
@@ -106,7 +108,7 @@ abstract class CreatePivot extends CreateTable
      * @see $userTable
      * @see $userTablePrimaryKey
      */
-    protected function defaultUserForeignKey($columnName)
+    protected function defaultUserForeignKey($columnName): array
     {
         return [
             'table' => $this->userTable,
@@ -120,7 +122,7 @@ abstract class CreatePivot extends CreateTable
      * @return array
      * @see defaultUserForeignKey()
      */
-    protected function createdByForeignKey($columnName)
+    protected function createdByForeignKey($columnName): array
     {
         return $this->defaultUserForeignKey($columnName);
     }

@@ -1,6 +1,8 @@
 <?php
 
-namespace tecnocen\rmdb\migrations;
+namespace roaresearch\yii2\rmdb\migrations;
+
+use yii\db\ColumnSchemaBuilder;
 
 /**
  * Migration to create entity tables which contain columns to store the users
@@ -29,6 +31,7 @@ abstract class CreatePersistentEntity extends CreateEntity
     public function init()
     {
         parent::init();
+
         if (isset($this->deletedByColumn)) {
             $this->defaultColumns[$this->deletedByColumn]
                 = $this->deletedByDefinition();
@@ -42,19 +45,19 @@ abstract class CreatePersistentEntity extends CreateEntity
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to delete the column to
+     * @return ColumnSchemaBuilder definition to delete the column to
      * store which user deleted the record.
      */
-    protected function deletedByDefinition()
+    protected function deletedByDefinition(): ColumnSchemaBuilder
     {
         return $this->normalKey()->defaultValue(null);
     }
 
     /**
-     * @return \yii\db\ColumnSchemaBuilder definition to delete the column to
+     * @return ColumnSchemaBuilder definition to delete the column to
      * store the datetime when the record was deleted.
      */
-    protected function deletedAtDefinition()
+    protected function deletedAtDefinition(): ColumnSchemaBuilder
     {
         return $this->datetime()->defaultValue(null);
     }
@@ -63,9 +66,9 @@ abstract class CreatePersistentEntity extends CreateEntity
      * Foreign key definition for the `deleted_by` column.
      *
      * @return array
-     * @se defaultUserForeignKey()
+     * @see defaultUserForeignKey()
      */
-    protected function deletedByForeignKey($columnName)
+    protected function deletedByForeignKey($columnName): array
     {
         return $this->defaultUserForeignKey($columnName);
     }

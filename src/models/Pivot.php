@@ -1,8 +1,8 @@
 <?php
 
-namespace tecnocen\rmdb\models;
+namespace roaresearch\yii2\rmdb\models;
 
-use tecnocen\rmdb\Module as RmdbModule;
+use roaresearch\yii2\rmdb\Module as RmdbModule;
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -29,7 +29,7 @@ abstract class Pivot extends \yii\db\ActiveRecord
      * @return RmdbModule
      * @throws InvalidConfigException
      */
-    protected function getRmdbModule()
+    protected function getRmdbModule(): RmdbModule
     {
         $module = Yii::$app->getModule($this->rmdbModuleId);
         if (!$module instanceof RmdbModule) {
@@ -73,7 +73,7 @@ abstract class Pivot extends \yii\db\ActiveRecord
      * @return ?array pairs of 'attribute' => 'typecast'. Return null if you
      * want the typecast to be determined by `rules()` method.
      */
-    protected function attributeTypecast()
+    protected function attributeTypecast(): ?array
     {
         return [$this->createdByAttribute => 'integer'];
     }
