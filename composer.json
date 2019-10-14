@@ -13,6 +13,12 @@
     "type": "library",
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "roaresearch/yii2-migrate": "~2.0.0",
@@ -20,7 +26,28 @@
     },
     "require-dev": {
         "codeception/base": "^3.1.0",
-        "codeception/verify": "~1.2.0"
+        "codeception/verify": "~1.2.0",
+        "phpunit/php-code-coverage": "~5.0.0",
+        "yiisoft/yii2-debug": "~2.1.0"
+    },
+    "scripts": {
+        "yii": "@php tests/_app/yii.php",
+        "deploy-tests": [
+            "@composer update --prefer-stable",
+            "@php tests/_app/yii.php migrate -p=@app/migrations/ --interactive=0"
+        ],
+        "run-tests": [
+            "@php vendor/bin/codecept run --steps"
+        ],
+        "run-coverage": [
+            "@php vendor/bin/codecept run --steps api --coverage --coverage-xml --coverage-html"
+        ]
+    },
+    "scripts-descriptions": {
+        "yii": "shortcut for `php tests/_app/yii.php`",
+        "deploy-tests": "Deploy the testing application",
+        "run-tests": "shortcut for `codecept run --steps`",
+        "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
     },
     "suggest": {
         "yii2tech/ar-softdelete": "Needed for Persistent Entities"
