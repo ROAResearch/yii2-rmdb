@@ -75,7 +75,9 @@ abstract class Pivot extends \yii\db\ActiveRecord
      */
     protected function attributeTypecast(): ?array
     {
-        return [$this->createdByAttribute => 'integer'];
+        return $this->createdByAttribute
+            ? [$this->createdByAttribute => 'integer']
+            : [];
     }
 
     /**
