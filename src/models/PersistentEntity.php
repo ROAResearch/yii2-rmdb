@@ -23,9 +23,11 @@ abstract class PersistentEntity extends Entity
      */
     protected function attributeTypecast(): ?array
     {
-        return parent::attributeTypecast() + [
-            $this->deletedByAttribute => 'integer',
-        ];
+        $parentAttributes = parent::attributeTypecast();
+
+        return $this->deletedByAttribute
+            ? $parentAttributes + [$this->deletedByAttribute => 'integer']
+            : $parentAttributes;
     }
 
     /**
