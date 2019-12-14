@@ -70,7 +70,7 @@ abstract class CreatePivot extends CreateTable
     /**
      * @inheritdoc
      */
-    public function defaultColumns()
+    public function defaultColumns(): array
     {
         return $this->defaultColumns;
     }
@@ -78,7 +78,7 @@ abstract class CreatePivot extends CreateTable
     /**
      * @inheritdoc
      */
-    public function defaultForeignKeys()
+    public function defaultForeignKeys(): array
     {
         return $this->defaultForeignKeys;
     }
