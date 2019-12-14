@@ -2,7 +2,7 @@
 
 return yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/common.php',
-        [
+    [
         'id' => 'yii2-rmdb-server-tests',
         'modules' => [
             'rmdb' => roaresearch\yii2\rmdb\Module::class,
