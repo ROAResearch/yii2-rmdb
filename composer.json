@@ -36,8 +36,8 @@
         "deploy-tests": [
             "@composer update --prefer-stable",
             "@composer migrate -- -p=@app/migrations",
-            "chmod +x git-hooks/pre-commit",
-            "ln -s git-hooks/pre-commit .git/hooks/pre-commit"
+            "chmod +x git-hooks/pre-commit.sh",
+            "ln -sfr git-hooks/pre-commit.sh .git/hooks/pre-commit"
         ],
         "sniff-php-file": [
             "@php -l",
@@ -45,12 +45,6 @@
         ],
         "run-tests": "vendor/bin/codecept run --steps",
         "run-coverage": "@composer run-tests -- --coverage --coverage-xml"
-    },
-    "scripts-descriptions": {
-        "yii": "shortcut for `php tests/_app/yii.php`",
-        "deploy-tests": "Deploy the testing application",
-        "run-tests": "shortcut for `codecept run --steps`",
-        "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
     },
     "scripts-descriptions": {
         "migrate": "shortcut to run a migration",
