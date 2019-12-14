@@ -28,24 +28,34 @@
         "codeception/base": "^3.1.0",
         "codeception/verify": "~1.2.0",
         "phpunit/php-code-coverage": "~5.0.0",
+        "squizlabs/php_codesniffer": "~3.5.0",
         "yiisoft/yii2-debug": "~2.1.0"
     },
     "scripts": {
-        "yii": "@php tests/_app/yii.php",
+        "migrate": "tests/_app/yii.php migrate --interactive=0",
         "deploy-tests": [
             "@composer update --prefer-stable",
-            "@php tests/_app/yii.php migrate -p=@app/migrations/ --interactive=0"
+            "@composer migrate -- -p=@app/migrations",
+            "chmod +x git-hooks/pre-commit",
+            "ln -s git-hooks/pre-commit .git/hooks/pre-commit"
         ],
-        "run-tests": [
-            "@php vendor/bin/codecept run --steps"
+        "sniff-php-file": [
+            "@php -l",
+            "vendor/bin/phpcs"
         ],
-        "run-coverage": [
-            "@php vendor/bin/codecept run --steps api --coverage --coverage-xml --coverage-html"
-        ]
+        "run-tests": "vendor/bin/codecept run --steps",
+        "run-coverage": "@composer run-tests -- --coverage --coverage-xml"
     },
     "scripts-descriptions": {
         "yii": "shortcut for `php tests/_app/yii.php`",
         "deploy-tests": "Deploy the testing application",
+        "run-tests": "shortcut for `codecept run --steps`",
+        "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
+    },
+    "scripts-descriptions": {
+        "migrate": "shortcut to run a migration",
+        "deploy-tests": "Deploy the testing application",
+        "sniff-php-file": "Lint and sniff a php file",
         "run-tests": "shortcut for `codecept run --steps`",
         "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
     },
