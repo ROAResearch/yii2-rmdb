@@ -23,9 +23,11 @@ abstract class Entity extends Pivot
      */
     protected function attributeTypecast(): ?array
     {
-        return parent::attributeTypecast() + [
-            $this->updatedByAttribute => 'integer',
-        ];
+        $parentAttributes = parent::attributeTypecast();
+
+        return $this->updatedByAttribute
+            ? $parentAttributes + [$this->updatedByAttribute => 'integer']
+            : $parentAttributes;
     }
 
 
