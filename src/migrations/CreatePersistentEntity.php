@@ -66,7 +66,7 @@ abstract class CreatePersistentEntity extends CreateEntity
      * Foreign key definition for the `deleted_by` column.
      *
      * @return array
-     * @se defaultUserForeignKey()
+     * @see defaultUserForeignKey()
      */
     protected function deletedByForeignKey($columnName): array
     {

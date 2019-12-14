@@ -10,7 +10,7 @@ use yii\{
     behaviors\TimestampBehavior,
     db\Expression as DbExpression,
     i18n\PhpMessageSource,
-    web\Application as WebApplication,
+    web\Application as WebApplication
 };
 
 /**
