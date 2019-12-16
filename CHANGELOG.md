@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.0.1
+-----
+
+- [Enh] Live Demo
+- [Bug] Behavior typecast fix
+- [Bug] Fix methods declaration 
+
 2.0.0
 -----
 
