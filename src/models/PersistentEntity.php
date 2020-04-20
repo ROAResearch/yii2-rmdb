@@ -57,7 +57,7 @@ abstract class PersistentEntity extends Entity
                 = null;
         };
 
-        return parent::behaviors() + [$softDelete];
+        return parent::behaviors() + ['softDelete' => $softDelete];
     }
 
 
