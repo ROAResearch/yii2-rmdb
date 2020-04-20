@@ -53,7 +53,7 @@ abstract class PersistentEntity extends Entity
         if ($this->deletedAtAttribute) {
             $softDelete['softDeleteAttributeValues'][$this->deletedAtAttribute]
                 = $module->timestampValue;
-            $softDelete['restoreAttributeValues'][$this->deletedByAttribute]
+            $softDelete['restoreAttributeValues'][$this->deletedAtAttribute]
                 = null;
         };
 
@@ -87,7 +87,7 @@ abstract class PersistentEntity extends Entity
 
         if ($this->deletedAtAttribute) {
             $deleted[] = "{$this->deletedAtAttribute} IS NOT NULL";
-            $notDeleted[$this->deletedByAttribute] = null;
+            $notDeleted[$this->deletedAtAttribute] = null;
         }
 
         $query = parent::find();
