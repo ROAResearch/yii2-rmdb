@@ -3,7 +3,11 @@
 namespace roaresearch\yii2\rmdb\models;
 
 use roaresearch\yii2\rmdb\Module as RmdbModule;
+use use yii2tech\ar\softdelete\SoftDeleteQueryBehavior;
 
+/**
+ * Models for records which must remain on database even after being deleted.
+ */
 abstract class PersistentEntity extends Entity
 {
     /**
@@ -37,21 +41,25 @@ abstract class PersistentEntity extends Entity
     {
         /** @var RmdbModule $module */
         $module = $this->getRmdbModule();
+        $softDelete = ['class' => $module->softDeleteClass];
+        
+        if ($this->deletedByAttribute) {
+            $softDelete['softDeleteAttributeValues'][$this->deletedByAttribute]
+                = $module->userId;
+            $softDelete['restoreAttributeValues'][$this->deletedByAttribute]
+                = null;
+        }
+        
+        if ($this->deletedAtAttribute) {
+            $softDelete['softDeleteAttributeValues'][$this->deletedAtAttribute]
+                = $module->timestampValue;
+            $softDelete['restoreAttributeValues'][$this->deletedByAttribute]
+                = null;
+        };
 
-        return parent::behaviors() + [
-            'softDelete' => [
-                'class' => $module->softDeleteClass,
-                'softDeleteAttributeValues' => [
-                    $this->deletedByAttribute => $module->userId,
-                    $this->deletedAtAttribute => $module->timestampValue,
-                ],
-                'restoreAttributeValues' => [
-                    $this->deletedByAttribute => null,
-                    $this->deletedAtAttribute => null,
-                ],
-            ],
-        ];
+        return parent::behaviors() + [$softDelete];
     }
+
 
     /**
      * @inheritdoc
@@ -62,5 +70,36 @@ abstract class PersistentEntity extends Entity
             $this->deletedByAttribute => RmdbModule::t('models', 'Deleted By'),
             $this->deletedAtAttribute => RmdbModule::t('models', 'Deleted At'),
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        $deleted = [];
+        $notDeleted = [];
+        
+        if ($this->deletedByAttribute) {
+            $deleted[] = "{$this->deletedByAttribute} IS NOT NULL";
+            $notDeleted[$this->deletedByAttribute] = null;
+        }
+
+        if ($this->deletedAtAttribute) {
+            $deleted[] = "{$this->deletedAtAttribute} IS NOT NULL";
+            $notDeleted[$this->deletedByAttribute] = null;
+        }
+
+        $query = parent::find();
+        $query->attachBehavior(
+            'softDelete',
+            [
+                'class' => SoftDeleteQueryBehavior::class,
+                'deletedCondition' => $deleted,
+                'notDeletedCondition' => $notDeleted,
+            ]
+        );
+
+        return $query;
     }
 }
