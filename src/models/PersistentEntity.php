@@ -74,7 +74,6 @@ abstract class PersistentEntity extends Entity
                         ? [$this->deletedAtAttribute => null]
                         : []
                 ),
-            ],
         ];
     }
 
