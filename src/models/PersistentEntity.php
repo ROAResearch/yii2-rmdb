@@ -96,12 +96,6 @@ abstract class PersistentEntity extends Entity
      */
     public static function find()
     {
-        return new SoftDeleteActiveQuery(
-            get_called_class(),
-            [
-                'deletedByAttribute' => $this->deletedByAttribute,
-                'deletedAtAttribute' => $this->deletedAtAttribute,
-            ]
-        );
+        return new SoftDeleteActiveQuery(get_called_class());
     }
 }
