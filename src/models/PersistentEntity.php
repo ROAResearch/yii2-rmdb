@@ -38,13 +38,14 @@ abstract class PersistentEntity extends Entity
      */
     public function behaviors()
     {
-        return parent::behaviors() + ['softDelete' => $this->softDeleteConf()];
+        return parent::behaviors()
+            + ['softDelete' => $this->softDeleteBehaviorConfig()];
     }
 
     /**
      * @return mixed configuration for the soft delete behavior
      */
-    protected function softDeleteConf()
+    protected function softDeleteBehaviorConfig()
     {
         /** @var RmdbModule $module */
         $module = $this->getRmdbModule();
