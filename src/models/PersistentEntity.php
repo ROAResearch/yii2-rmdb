@@ -4,6 +4,9 @@ namespace roaresearch\yii2\rmdb\models;
 
 use roaresearch\yii2\rmdb\Module as RmdbModule;
 
+/**
+ * Models for records which must remain on database even after being deleted.
+ */
 abstract class PersistentEntity extends Entity
 {
     /**
@@ -35,20 +38,41 @@ abstract class PersistentEntity extends Entity
      */
     public function behaviors()
     {
+        return parent::behaviors() + ['softDelete' => $this->softDeleteConf()];
+    }
+
+    /**
+     * @return mixed configuration for the soft delete behavior
+     */
+    protected function softDeleteConf()
+    {
         /** @var RmdbModule $module */
         $module = $this->getRmdbModule();
 
-        return parent::behaviors() + [
-            'softDelete' => [
-                'class' => $module->softDeleteClass,
-                'softDeleteAttributeValues' => [
-                    $this->deletedByAttribute => $module->userId,
-                    $this->deletedAtAttribute => $module->timestampValue,
-                ],
-                'restoreAttributeValues' => [
-                    $this->deletedByAttribute => null,
-                    $this->deletedAtAttribute => null,
-                ],
+        return [
+            'class' => $module->softDeleteClass,
+            'softDeleteAttributeValues' =>
+                (
+                    $this->deletedByAttribute
+                        ? [$this->deletedByAttribute => $module->userId]
+                        : []
+                )
+                + (
+                    $this->deletedAtAttribute
+                        ? [$this->deletedAtAttribute => $module->timestampValue]
+                        : []
+                ),
+            'restoreAttributeValues' =>
+                (
+                    $this->deletedByAttribute
+                        ? [$this->deletedByAttribute => null]
+                        : []
+                )
+                + (
+                    $this->deletedAtAttribute
+                        ? [$this->deletedAtAttribute => null]
+                        : []
+                ),
             ],
         ];
     }
@@ -62,5 +86,21 @@ abstract class PersistentEntity extends Entity
             $this->deletedByAttribute => RmdbModule::t('models', 'Deleted By'),
             $this->deletedAtAttribute => RmdbModule::t('models', 'Deleted At'),
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return SoftDeleteActiveQuery
+     */
+    public static function find()
+    {
+        return new SoftDeleteActiveQuery(
+            get_called_class(),
+            [
+                'deletedByAttribute' => $this->deletedByAttribute,
+                'deletedAtAttribute' => $this->deletedAtAttribute,
+            ]
+        );
     }
 }
