@@ -27,7 +27,7 @@ trait SoftDeleteActiveQueryTrait
     protected function softDeleteAttributes(string $append = ''): array
     {
         $attributes = [];
-        $alias = array_keys($this->owner->getTablesUsedInFrom())[0];
+        $alias = array_keys($this->getTablesUsedInFrom())[0];
 
         if ($this->deletedByAttribute) {
             $attributes[] = "$alias.[[{$this->deletedByAttribute}]] $append";
@@ -65,4 +65,6 @@ trait SoftDeleteActiveQueryTrait
     }
 
     abstract public function andOnCondition($condition, $params = []);
+
+    abstract public function getTablesUsedInFrom();
 }
