@@ -2,6 +2,7 @@
 
 namespace roaresearch\yii2\rmdb\models;
 
+use roaresearch\yii2\rmdb\SoftDeleteActiveQuery;
 use roaresearch\yii2\rmdb\Module as RmdbModule;
 
 /**
