@@ -215,3 +215,14 @@ class Product extends \roaresearch\yii2\rmdb\models\PersistentEntity
     // rest of model methods and logic
 }
 ```
+
+This model uses the `SoftDeleteActiveQuery` class which add 2 methods to filter
+based on the deletion status of a record.
+
+- deleted()
+- notDeleted()
+
+This methods will use columns `$deletedByAttribute` and `$deletedByAttribute`
+to determine if a record was soft deleted or not. To prevent conflicts in joins
+the attributes are normalized with the query alias. For this reason **the
+`alias()` method must be called before the `deleleted()` or `notDeleted()`**.

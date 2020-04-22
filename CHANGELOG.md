@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.1.0
+-----
+
+- [Enh] SoftDeleteActiveQuery adding methods to filter persistent records
+  if they are deleted or not (Faryshta)
+
 2.0.1
 -----
 
