@@ -87,8 +87,8 @@ abstract class Pivot extends \yii\db\ActiveRecord
     {
         RmdbModule::registerTranslations();
         return [
-            $this->createdByAttribute => RmdbModule::t('model', 'Created By'),
-            $this->createdAtAttribute => RmdbModule::t('model', 'Created At'),
+            $this->createdByAttribute => RmdbModule::t('models', 'Created By'),
+            $this->createdAtAttribute => RmdbModule::t('models', 'Created At'),
         ];
     }
 }

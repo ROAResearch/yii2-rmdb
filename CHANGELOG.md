@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.1.1
+-----
+
+- [Bug] Fix i18n support
+
 2.1.0
 -----
 
