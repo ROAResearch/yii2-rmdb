@@ -87,7 +87,7 @@ class Module extends \yii\base\Module
     public static function registerTranslations()
     {
         $i18n = Yii::$app->i18n;
-        if (!isset($i18n->translations['tecnocen/rmdb/*'])) {
+        if (!isset($i18n->translations['roaresearch/rmdb/*'])) {
             $i18n->translations['roaresearch/rmdb/*'] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en',
