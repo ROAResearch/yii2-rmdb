@@ -87,11 +87,14 @@ class Module extends \yii\base\Module
     public static function registerTranslations()
     {
         $i18n = Yii::$app->i18n;
-        if (!isset($i18n->translations['roaresearch/rmdb/*'])) {
-            $i18n->translations['roaresearch/rmdb/*'] = [
+        if (!isset($i18n->translations['roaresearch/yii2/rmdb/*'])) {
+            $i18n->translations['roaresearch/yii2/rmdb/*'] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en',
                 'basePath' => __DIR__ . '/messages',
+                'fileMap' => [
+                    'roaresearch/yii2/rmdb/models' => 'models.php',
+                ],
             ];
         }
     }
@@ -103,7 +106,7 @@ class Module extends \yii\base\Module
         ?string $language = null
     ): string {
         return Yii::t(
-            'roaresearch/rmdb/' . $category,
+            'roaresearch/yii2/rmdb/' . $category,
             $message,
             $params,
             $language
