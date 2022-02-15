@@ -10,13 +10,13 @@ abstract class Entity extends Pivot
      * @var string name of the attribute to store the user who updated the
      * record. Set as `null` to omit the functionality.
      */
-    protected $updatedByAttribute = 'updated_by';
+    protected ?string $updatedByAttribute = 'updated_by';
 
     /**
      * @var string name of the attribute to store the datetime when the record
      * was updated. Set as `null` to omit the functionality.
      */
-    protected $updatedAtAttribute = 'updated_at';
+    protected ?string $updatedAtAttribute = 'updated_at';
 
     /**
      * @inheritdoc

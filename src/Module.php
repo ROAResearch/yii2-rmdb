@@ -23,22 +23,22 @@ class Module extends \yii\base\Module
     /**
      * @var string
      */
-    public $blameableClass = BlameableBehavior::class;
+    public string $blameableClass = BlameableBehavior::class;
 
     /**
      * @var string
      */
-    public $timestampClass = TimestampBehavior::class;
+    public string $timestampClass = TimestampBehavior::class;
 
     /**
      * @var string
      */
-    public $typecastClass = AttributeTypecastBehavior::class;
+    public string $typecastClass = AttributeTypecastBehavior::class;
 
     /**
      * @var string
      */
-    public $softDeleteClass = SoftDeleteBehavior::class;
+    public string $softDeleteClass = SoftDeleteBehavior::class;
 
     /**
      * @var mixed value to be passed on timestamp behavior.
@@ -61,16 +61,15 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        if (empty($this->timestampValue)) {
-            $this->timestampValue = new DbExpression('NOW()');
-        }
+
+        $this->timestampValue ??= new DbExpression('NOW()');
         $this->userId = (Yii::$app instanceof WebApplication
                 && !Yii::$app->user->isGuest
             )
             ? Yii::$app->user->id
             : $this->defaultUserId;
 
-        $this->registerTranslations();
+        static::registerTranslations();
     }
 
     /**
@@ -86,17 +85,14 @@ class Module extends \yii\base\Module
      */
     public static function registerTranslations()
     {
-        $i18n = Yii::$app->i18n;
-        if (!isset($i18n->translations['roaresearch/yii2/rmdb/*'])) {
-            $i18n->translations['roaresearch/yii2/rmdb/*'] = [
-                'class' => PhpMessageSource::class,
-                'sourceLanguage' => 'en',
-                'basePath' => __DIR__ . '/messages',
-                'fileMap' => [
-                    'roaresearch/yii2/rmdb/models' => 'models.php',
-                ],
-            ];
-        }
+        Yii::$app->i18n->translations['roaresearch/yii2/rmdb/*'] ??= [
+            'class' => PhpMessageSource::class,
+            'sourceLanguage' => 'en',
+            'basePath' => __DIR__ . '/messages',
+            'fileMap' => [
+                'roaresearch/yii2/rmdb/models' => 'models.php',
+            ],
+        ];
     }
 
     public static function t(

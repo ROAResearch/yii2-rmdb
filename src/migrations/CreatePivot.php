@@ -15,20 +15,20 @@ abstract class CreatePivot extends CreateTable
      * @var ?string the name of the column to store the user which created the
      * record. If this property is set as `null` the column won't be created.
      */
-    public $createdByColumn = 'created_by';
+    public ?string $createdByColumn = 'created_by';
 
     /**
      * @var ?string the name of the column to store the datetime when the record
      * was created. If this property is set as `null` the column won't be created.
      */
-    public $createdAtColumn = 'created_at';
+    public ?string $createdAtColumn = 'created_at';
 
     /**
      * @var string name of the table used for the foreign key in user columns.
      *
      * @see defaultUserForeignKey()
      */
-    public $userTable = 'user';
+    public string $userTable = 'user';
 
     /**
      * @var string name of the primary column of the user table for the foreign
@@ -36,17 +36,17 @@ abstract class CreatePivot extends CreateTable
      *
      * @see defaultUserForeignKey()
      */
-    public $userTablePrimaryKey = 'id';
+    public string $userTablePrimaryKey = 'id';
 
     /**
      * @var \yii\db\ColumnSchemaBuilder[]
      */
-    protected $defaultColumns = [];
+    protected array $defaultColumns = [];
 
     /**
      * @var string[]
      */
-    protected $defaultForeignKeys = [];
+    protected array $defaultForeignKeys = [];
 
     /**
      * @inheritdoc

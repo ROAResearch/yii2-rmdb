@@ -4,26 +4,25 @@ namespace roaresearch\yii2\rmdb\models;
 
 use roaresearch\yii2\rmdb\Module as RmdbModule;
 use Yii;
-use yii\base\InvalidConfigException;
 
 abstract class Pivot extends \yii\db\ActiveRecord
 {
     /**
-     * @var string name of the attribute to store the user who created the
+     * @var ?string name of the attribute to store the user who created the
      * record. Set as `null` to omit the functionality.
      */
-    protected $createdByAttribute = 'created_by';
+    protected ?string $createdByAttribute = 'created_by';
 
     /**
-     * @var string name of the attribute to store the datetime when the record
+     * @var ?string name of the attribute to store the datetime when the record
      * was created. Set as `null` to omit the functionality.
      */
-    protected $createdAtAttribute = 'created_at';
+    protected ?string $createdAtAttribute = 'created_at';
 
     /**
      * @var string id to obtain the rmdb module from `Yii::$app`
      */
-    protected $rmdbModuleId = 'rmdb';
+    protected string $rmdbModuleId = 'rmdb';
 
     /**
      * @return RmdbModule
@@ -31,15 +30,7 @@ abstract class Pivot extends \yii\db\ActiveRecord
      */
     protected function getRmdbModule(): RmdbModule
     {
-        $module = Yii::$app->getModule($this->rmdbModuleId);
-        if (!$module instanceof RmdbModule) {
-            throw new InvalidConfigException(
-                "Module '{$this->rmdbModuleId}' must be instance of "
-                    . RmdbModule::class
-            );
-        }
-
-        return $module;
+        return Yii::$app->getModule($this->rmdbModuleId);
     }
 
     /**
@@ -48,6 +39,7 @@ abstract class Pivot extends \yii\db\ActiveRecord
     public function behaviors()
     {
         $module = $this->getRmdbModule();
+
         return [
             'blameable' => [
                 'class' => $module->blameableClass,
@@ -85,7 +77,6 @@ abstract class Pivot extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        RmdbModule::registerTranslations();
         return [
             $this->createdByAttribute => RmdbModule::t('models', 'Created By'),
             $this->createdAtAttribute => RmdbModule::t('models', 'Created At'),
