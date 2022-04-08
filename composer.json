@@ -46,6 +46,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
+            "@configDB",
             "@deploy-tests",
             "@run-tests"
         ],
