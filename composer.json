@@ -35,7 +35,6 @@
     "require-dev": {
         "codeception/codeception": "~5.0.0",
         "codeception/verify": "~1.2.0",
-        "designsecurity/progpilot": "*",
         "enlightn/security-checker": "*",
         "ergebnis/composer-normalize": "*",
         "friendsofphp/php-cs-fixer": "*",
@@ -82,6 +81,13 @@
     "autoload": {
         "psr-4": {
             "roaresearch\\yii2\\rmdb\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp": true
         }
     }
 }
