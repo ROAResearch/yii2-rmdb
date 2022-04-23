@@ -15,10 +15,6 @@
     "minimum-stability": "dev",
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/ROAResearch/composer-utils"
-        },
-        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
@@ -39,10 +35,24 @@
     "require-dev": {
         "codeception/codeception": "~5.0.0",
         "codeception/verify": "~1.2.0",
-        "phpunit/php-code-coverage": "~10.0.0",
+        "designsecurity/progpilot": "*",
+        "enlightn/security-checker": "*",
+        "ergebnis/composer-normalize": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "php-parallel-lint/php-parallel-lint": "*",
+        "phpmd/phpmd": "*",
+        "phpstan/phpstan": "*",
+        "povils/phpmnd": "*",
+        "roave/security-advisories": "*",
+        "sebastian/phpcpd": "*",
+        "symplify/easy-coding-standard": "*",
+        "vimeo/psalm": "*",
+        "phpro/grumphp": "~1.11.0",
         "roaresearch/composer-utils": "*",
         "squizlabs/php_codesniffer": "~3.5.0",
         "yiisoft/yii2-debug": "~2.1.0"
+
+
     },
     "scripts": {
         "post-create-project-cmd": [
