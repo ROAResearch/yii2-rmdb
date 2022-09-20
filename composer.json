@@ -29,40 +29,25 @@
     },
     "require": {
         "php": "~8.1",
-        "roaresearch/yii2-migrate": "dev-upgrade81 as 3.0.x-dev",
+        "roaresearch/yii2-migrate": "~3.0.0",
         "yiisoft/yii2": "~2.0.27"
     },
     "require-dev": {
         "codeception/codeception": "~5.0.0",
         "codeception/verify": "~1.2.0",
-        "enlightn/security-checker": "*",
-        "ergebnis/composer-normalize": "*",
-        "friendsofphp/php-cs-fixer": "*",
-        "php-parallel-lint/php-parallel-lint": "*",
-        "phpmd/phpmd": "*",
-        "phpstan/phpstan": "*",
-        "povils/phpmnd": "*",
-        "roave/security-advisories": "*",
-        "sebastian/phpcpd": "*",
-        "symplify/easy-coding-standard": "*",
-        "vimeo/psalm": "*",
-        "phpro/grumphp": "~1.11.0",
         "roaresearch/composer-utils": "*",
-        "squizlabs/php_codesniffer": "~3.5.0",
         "yiisoft/yii2-debug": "~2.1.0"
-
-
     },
     "scripts": {
         "post-create-project-cmd": [
-            "@configDB",
-            "@deploy-tests",
+            "@config-db",
+            "@deploy-db",
             "@run-tests"
         ],
-        "configDB": "roaresearch\\composer\\utils\\DBListener::config",
-        "blankDB": "roaresearch\\composer\\utils\\DBListener::blankConfig",
+        "config-db": "roaresearch\\composer\\utils\\DBListener::config",
+        "blank-db": "roaresearch\\composer\\utils\\DBListener::blankConfig",
         "migrate": "tests/_app/yii.php migrate --interactive=0",
-        "deploy-tests": [
+        "deploy-db": [
             "@composer migrate -- -p=@app/migrations"
         ],
         "run-tests": "vendor/bin/codecept run --steps",
@@ -71,7 +56,6 @@
     "scripts-descriptions": {
         "migrate": "shortcut to run a migration",
         "deploy-tests": "Deploy the testing application",
-        "sniff-php-file": "Lint and sniff a php file",
         "run-tests": "shortcut for `codecept run --steps`",
         "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
     },
