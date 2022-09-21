@@ -39,7 +39,8 @@
         "yiisoft/yii2-debug": "~2.1.0"
     },
     "scripts": {
-        "post-create-project-cmd": [
+        "deploy": [
+            "@install",
             "@config-db",
             "@deploy-db",
             "@run-tests"

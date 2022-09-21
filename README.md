@@ -132,7 +132,7 @@ class m170101_000001_sale extends CreatePersistentEntity
 ### RMDB Module
 
 This library uses a custom module to help configure all the extended models
-in an unified way.
+in an homologued way.
 
 configure it in your `common\config\main.php` in `yii-app-advanced` and
 `common\config.php` in `yii-app-basic`.
@@ -226,3 +226,24 @@ This methods will use columns `$deletedByAttribute` and `$deletedByAttribute`
 to determine if a record was soft deleted or not. To prevent conflicts in joins
 the attributes are normalized with the query alias. For this reason **the
 `alias()` method must be called before the `deleleted()` or `notDeleted()`**.
+
+```php
+Product::find()
+  ->alias('p')
+  ->notDeleted()
+  ->innerJoin('brand b')
+```
+
+#### Testing Environment
+
+This library use [Composer Utils](https://github.com/ROAResearch/composer-utils)
+to quickly deploy the needed database and testing Environment.
+
+```bash
+git clone https://github.com/ROAResearch/yii2-rmdb.git
+cd yii2-rmdb/
+composer deploy
+```
+
+This will ask db credentials, validate them and create the needed database and
+structure.
