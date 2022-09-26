@@ -33,14 +33,17 @@
         "yiisoft/yii2": "~2.0.27"
     },
     "require-dev": {
+        "ext-mbstring": "*",
         "codeception/codeception": "~5.0.0",
+        "codeception/module-asserts": "*",
+        "codeception/module-yii2": "*",
         "codeception/verify": "~1.2.0",
         "roaresearch/composer-utils": "*",
         "yiisoft/yii2-debug": "~2.1.0"
     },
     "scripts": {
         "deploy": [
-            "@install",
+            "@composer install",
             "@config-db",
             "@deploy-db",
             "@run-tests"
