@@ -44,6 +44,7 @@
     "scripts": {
         "deploy": [
             "@composer install",
+            "tests\\AutoloadListener::autoload",
             "@config-db",
             "@deploy-db",
             "@run-tests"
@@ -67,6 +68,9 @@
         "yii2tech/ar-softdelete": "Needed for Persistent Entities"
     },
     "autoload": {
+        "classmap": [
+            "tests/AutoloadListener.php"
+        ],
         "psr-4": {
             "roaresearch\\yii2\\rmdb\\": "src/"
         }
