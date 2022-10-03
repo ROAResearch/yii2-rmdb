@@ -35,7 +35,7 @@
     "require-dev": {
         "ext-mbstring": "*",
         "codeception/codeception": "~5.0.0",
-        "codeception/module-asserts": "*",
+        "codeception/module-asserts": "dev-master",
         "codeception/module-yii2": "*",
         "codeception/verify": "~1.2.0",
         "roaresearch/composer-utils": "*",
