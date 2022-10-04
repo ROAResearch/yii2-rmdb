@@ -68,12 +68,14 @@
         "yii2tech/ar-softdelete": "Needed for Persistent Entities"
     },
     "autoload": {
-        "classmap": [
-            "tests/AutoloadListener.php"
-        ],
         "psr-4": {
             "roaresearch\\yii2\\rmdb\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/AutoloadListener.php"
+        ]
     },
     "config": {
         "allow-plugins": {
