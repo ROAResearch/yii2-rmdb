@@ -158,6 +158,7 @@ build:
             dbname: yii2_rmdb_test
             dbdsn: mysql:host=127.0.0.1:3306
             dbpass:
+            XDEBUG_MODE: coverage
         php:
             version: 8.1.2
     nodes:
@@ -165,11 +166,6 @@ build:
             services:
             # For available tags, see https://hub.docker.com/_/mariadb/
                 mariadb: 10
-            # project_setup:
-            #     before:
-            #         # crear la base de datos, el nombre tiene que coincidir con la base
-            #         # del archivo `environments/dev/common/config/main-local.php`
-            #         -  mysql -u root --host=127.0.0.1 --port=3306 -e "create database yii2_rmdb_test"
             tests:
                 before:
                     # run migrations
