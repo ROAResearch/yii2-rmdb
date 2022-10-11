@@ -157,6 +157,7 @@ build:
             dbuser: root
             dbname: yii2_rmdb_test
             dbdsn: mysql:host=127.0.0.1:3306
+            dbpass:
         php:
             version: 8.1.2
     nodes:
