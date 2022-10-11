@@ -162,14 +162,13 @@ build:
                 mariadb: 10
             project_setup:
                 before:
-                    - mysql --version
                     # crear la base de datos, el nombre tiene que coincidir con la base
                     # del archivo `environments/dev/common/config/main-local.php`
                     -  mysql -u root --host=127.0.0.1 --port=3306 -e "create database yii2_rmdb_test"
             tests:
                 before:
                     # run migrations
-                    - composer deploy-tests
+                    - composer deploy
                 override:
                     # test coverage
                     -
