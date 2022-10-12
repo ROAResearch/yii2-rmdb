@@ -17,13 +17,13 @@ abstract class CreatePersistentEntity extends CreateEntity
      * @var ?string the name of the column to store the user which deleted the
      * record. Set as `null` to prevent this column from being deleted.
      */
-    public $deletedByColumn = 'deleted_by';
+    public ?string $deletedByColumn = 'deleted_by';
 
     /**
      * @var ?string the name of the column to store the datetime when the record
      * was deleted. Set as `null` to prevent this column from being deleted.
      */
-    public $deletedAtColumn = 'deleted_at';
+    public ?string $deletedAtColumn = 'deleted_at';
 
     /**
      * @inheritdoc

@@ -19,29 +19,41 @@
             "url": "https://asset-packagist.org"
         }
     ],
+    "extra": {
+        "utilConfig": {
+            "dbname": "yii2_rmdb_test",
+            "dbtpls": {
+                "tests/_app/config/db.local.php": "roaresearch\\composer\\utils\\Yii2DBTPL"
+            }
+        }
+    },
     "require": {
-        "php": ">=7.1",
-        "roaresearch/yii2-migrate": "~2.0.0",
+        "php": "~8.1",
+        "roaresearch/yii2-migrate": "~3.0.0",
         "yiisoft/yii2": "~2.0.27"
     },
     "require-dev": {
-        "codeception/base": "^3.1.0",
+        "ext-mbstring": "*",
+        "codeception/codeception": "~5.0.0",
+        "codeception/module-asserts": "dev-master",
+        "codeception/module-yii2": "*",
         "codeception/verify": "~1.2.0",
-        "phpunit/php-code-coverage": "~5.0.0",
-        "squizlabs/php_codesniffer": "~3.5.0",
+        "roaresearch/composer-utils": "*",
         "yiisoft/yii2-debug": "~2.1.0"
     },
     "scripts": {
-        "migrate": "tests/_app/yii.php migrate --interactive=0",
-        "deploy-tests": [
-            "@composer update --prefer-stable",
-            "@composer migrate -- -p=@app/migrations",
-            "chmod +x git-hooks/pre-commit.sh",
-            "ln -sfr git-hooks/pre-commit.sh .git/hooks/pre-commit"
+        "deploy": [
+            "@composer install",
+            "tests\\AutoloadListener::autoload",
+            "@config-db",
+            "@deploy-db",
+            "@run-tests"
         ],
-        "sniff-php-file": [
-            "@php -l",
-            "vendor/bin/phpcs"
+        "config-db": "roaresearch\\composer\\utils\\DBListener::config",
+        "blank-db": "roaresearch\\composer\\utils\\DBListener::blankConfig",
+        "migrate": "tests/_app/yii.php migrate --interactive=0",
+        "deploy-db": [
+            "@composer migrate -- -p=@app/migrations"
         ],
         "run-tests": "vendor/bin/codecept run --steps",
         "run-coverage": "@composer run-tests -- --coverage --coverage-xml"
@@ -49,7 +61,6 @@
     "scripts-descriptions": {
         "migrate": "shortcut to run a migration",
         "deploy-tests": "Deploy the testing application",
-        "sniff-php-file": "Lint and sniff a php file",
         "run-tests": "shortcut for `codecept run --steps`",
         "run-coverage": "shortcut for `run-tests -- --coverage --coverage-xml"
     },
@@ -59,6 +70,18 @@
     "autoload": {
         "psr-4": {
             "roaresearch\\yii2\\rmdb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/AutoloadListener.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp": true
         }
     }
 }

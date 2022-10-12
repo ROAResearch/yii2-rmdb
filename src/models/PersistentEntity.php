@@ -2,8 +2,7 @@
 
 namespace roaresearch\yii2\rmdb\models;
 
-use roaresearch\yii2\rmdb\SoftDeleteActiveQuery;
-use roaresearch\yii2\rmdb\Module as RmdbModule;
+use roaresearch\yii2\rmdb\{SoftDeleteActiveQuery, Module as RmdbModule};
 
 /**
  * Models for records which must remain on database even after being deleted.
@@ -14,13 +13,13 @@ abstract class PersistentEntity extends Entity
      * @var string name of the attribute to store the user who deleted the
      * record. Set as `null` to omit the functionality.
      */
-    protected $deletedByAttribute = 'deleted_by';
+    protected ?string $deletedByAttribute = 'deleted_by';
 
     /**
      * @var string name of the attribute to store the datetime when the record
      * was deleted. Set as `null` to omit the functionality.
      */
-    protected $deletedAtAttribute = 'deleted_at';
+    protected ?string $deletedAtAttribute = 'deleted_at';
 
     /**
      * @inheritdoc
@@ -46,7 +45,7 @@ abstract class PersistentEntity extends Entity
     /**
      * @return mixed configuration for the soft delete behavior
      */
-    protected function softDeleteBehaviorConfig()
+    protected function softDeleteBehaviorConfig(): array
     {
         /** @var RmdbModule $module */
         $module = $this->getRmdbModule();
@@ -96,6 +95,6 @@ abstract class PersistentEntity extends Entity
      */
     public static function find()
     {
-        return new SoftDeleteActiveQuery(get_called_class());
+        return new SoftDeleteActiveQuery(static::class);
     }
 }

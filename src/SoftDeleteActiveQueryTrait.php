@@ -12,17 +12,17 @@ trait SoftDeleteActiveQueryTrait
      * @var string name of the attribute to store the user who deleted the
      * record. Set as `null` to omit the functionality.
      */
-    protected $deletedByAttribute = 'deleted_by';
+    protected string $deletedByAttribute = 'deleted_by';
 
     /**
      * @var string name of the attribute to store the datetime when the record
      * was deleted. Set as `null` to omit the functionality.
      */
-    protected $deletedAtAttribute = 'deleted_at';
+    protected string $deletedAtAttribute = 'deleted_at';
 
     /**
      * @param string $append condition attached to the attributes
-     * @return string[] noramlized attributes for usage.
+     * @return string[] normalized attributes for usage.
      */
     protected function softDeleteAttributes(string $append = ''): array
     {

@@ -14,13 +14,13 @@ abstract class CreateEntity extends CreatePivot
      * @var ?string the name of the column to store the user which updated the
      * record. If this property is set as `null` the column won't be created.
      */
-    public $updatedByColumn = 'updated_by';
+    public ?string $updatedByColumn = 'updated_by';
 
     /**
      * @var ?string the name of the column to store the datetime when the record
      * was updated. If this property is set as `null` the column won't be created.
      */
-    public $updatedAtColumn = 'updated_at';
+    public ?string $updatedAtColumn = 'updated_at';
 
     /**
      * @inheritdoc
